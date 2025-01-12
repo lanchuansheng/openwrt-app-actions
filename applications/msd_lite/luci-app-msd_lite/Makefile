@@ -1,25 +1,14 @@
+#
+# Copyright (C) 2008-2014 The LuCI Team <luci@lists.subsignal.org>
+#
+# This is free software, licensed under the Apache License, Version 2.0 .
+#
+
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=luci-app-msd_lite
-PKG_VERSION:=20220830
+LUCI_TITLE:=msd_lite web config
+LUCI_DEPENDS:=+msd_lite +lsof
 
-include $(INCLUDE_DIR)/package.mk
+include ../../luci.mk
 
-define Package/luci-app-msd_lite
- 	SECTION:=luci
-	CATEGORY:=LuCI
-	SUBMENU:=3. Applications
-	TITLE:=msd_lite web config
-	PKGARCH:=all
-	DEPENDS:=+msd_lite
-endef
-
-define Build/Compile
-endef
-
-define Package/luci-app-msd_lite/install
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci
-	cp -pR ./luasrc/* $(1)/usr/lib/lua/luci
-endef
-
-$(eval $(call BuildPackage,luci-app-msd_lite))
+# call BuildPackage - OpenWrt buildroot signature

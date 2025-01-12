@@ -1,4 +1,8 @@
-m = Map("msd_lite", "msd_lite", translate("msd_lite is a UDP-to-HTTP multicast traffic relay daemon, here you can configure the settings."))
+require("luci.sys")
+
+m = Map("msd_lite")
+m.title = translate("msd_lite")
+m.description = translate("msd_lite is a UDP-to-HTTP multicast traffic relay daemon, here you can configure the settings.")
 
 m:section(SimpleSection).template  = "msd_lite/msdlite_status"
 
@@ -11,12 +15,12 @@ enable.rmempty = false
 
 port=s:option(Value, "port", translate("Port"))
 port.datatype = "port"
-port.default = "7088"
+port.default = "45971"
 port.rmempty = false
 
 source=s:option(Value, "source", translate("Source Interface"))
 source.datatype = "network"
-source.default = "eth0.85"
+source.default = "wan.3964"
 source.rmempty = false
 
 threads=s:option(Value, "threads", translate("Max CPU threads"))
@@ -30,5 +34,9 @@ log_file.datatype = "string"
 log_file.default = "/dev/null"
 log_file.rmempty = false
 
+local apply= luci.http.formvalue("cbi.apply")
+if apply then
+		io.popen("/etc/init.d/msd_lite restart")
+end
 
 return m
