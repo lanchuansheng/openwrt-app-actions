@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-msd_lite
-PKG_VERSION:=20220830
+PKG_VERSION:=20250112
 
 include $(INCLUDE_DIR)/package.mk
 
